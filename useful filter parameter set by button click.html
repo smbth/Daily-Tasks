@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="todo" ng-controller="myCtrl">
+        <!-- filter buttons -->
+        <div>
+            <button ng-click="orderBy()">All Tasks</button>
+            <button ng-click="orderBy(false)">To Do</button>
+            <button ng-click="orderBy(true)">Completed</button>
+        </div>
+        <h3>false - incomplete task, true - completed task</h3>
+        <!-- Div to display the tasks -->
+        <div>
+            <li ng-repeat="x in tasklist | filter:flag">
+                {{x.value+" "+x.status}}
+            </li>
+        </div>
+    </div>
+
+        <!-- author script -->
+        <script type="text/javascript">
+            var app=angular.module('todo',[]);
+            app.controller('myCtrl',function($scope){
+                // false - incomplete; true - complete
+                $scope.tasklist=[
+                    {value:"task 1",status:true},
+                    {value:"task 2",status:false},
+                    {value:"task 3",status:true}
+                ];
+
+                $scope.orderBy=function(x){
+                    $scope.flag=x;
+                }
+
+            });
+        </script>
+</body>
+</html>
+<!--DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+
+<p>Click the table headers to change the sorting order:</p>
+
+<div ng-app="myApp" ng-controller="namesCtrl">
+
+<table border="1" width="100%">
+<tr>
+<th ng-click="orderByMe('name')">Name</th>
+<th ng-click="orderByMe('country')">Country</th>
+</tr>
+<tr ng-repeat="x in names | orderBy:myOrderBy">
+<td>{{x.name}}</td>
+<td>{{x.country}}</td>
+</tr>
+</table>
+
+</div>
+
+<script>
+angular.module('myApp', []).controller('namesCtrl', function($scope) {
+    $scope.names = [
+        {name:'Jani',country:'Norway'},
+        {name:'Carl',country:'Sweden'},
+        {name:'Margareth',country:'England'},
+        {name:'Hege',country:'Norway'},
+        {name:'Joe',country:'Denmark'},
+        {name:'Gustav',country:'Sweden'},
+        {name:'Birgit',country:'Denmark'},
+        {name:'Mary',country:'England'},
+        {name:'Kai',country:'Norway'}
+        ];
+    $scope.orderByMe = function(x) {
+        $scope.myOrderBy = x;
+    }
+});
+</script>
+
+</body>
+</html-->
