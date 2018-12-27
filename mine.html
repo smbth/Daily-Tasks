@@ -1,0 +1,46 @@
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script>
+<div ng-app="myApp">
+  <div class="row">
+    <div class="text-center"><h4>AngularJS Directive - only letters input</h4></div>
+    <div class="small-8 small-centered columns panel">
+      <form>
+        <div class="row">
+          <div class="small-3 columns">
+            <label for="right-label" class="right inline">Only letters input</label>
+          </div>
+          <div class="small-9 columns">
+            <input only-letters-input type="text" id="right-label" ng-model="myForm.onlyLetters">
+          </div>
+        </div>
+      </form>
+      <pre>myForm = {{myForm | json}}</pre>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var app = angular.module('myApp', []);
+
+    (function() {
+
+      app.directive('onlyLettersInput', onlyLettersInput);
+      
+      function onlyLettersInput() {
+          return {
+            require: 'ngModel',
+            link: function(scope, element, attr, ngModelCtrl) {
+              function fromUser(text) {
+                console.log(text);
+                var transformedInput = text.replace(/[a-zA-Z]/g, '');
+                console.log(transformedInput);
+                if (transformedInput !== text) {
+                  ngModelCtrl.$setViewValue(transformedInput);
+                  ngModelCtrl.$render();
+                }
+                return transformedInput;
+              }
+              ngModelCtrl.$parsers.push(fromUser);
+            }
+          };
+        };
+
+    })();
+  </script>
