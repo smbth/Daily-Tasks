@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/37717493/usage-of-broadcast-emit-and-on-in-angularjs
